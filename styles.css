@@ -72,7 +72,15 @@ a { color: inherit; }
 
 h1 { margin: 0; font-family: var(--display); font-weight: 900; font-size: 44px; line-height: 1; letter-spacing: 0.01em; }
 .tag { margin: 8px 0 0; color: var(--orange); font-weight: 600; font-size: 17px; letter-spacing: 0.08em; }
-.wordmark { margin: 0 auto; font-family: var(--display); font-weight: 900; font-size: 64px; line-height: 0.95; text-transform: uppercase; color: var(--orange); }
+/* Logo con transparencia: se pinta con una máscara, así toma el color de marca sobre el fondo crema. */
+.wordmark {
+  width: min(300px, 75vw);
+  aspect-ratio: 2000 / 351;
+  margin: 0 auto;
+  background: var(--orange);
+  -webkit-mask: url('/img/wordmark.webp') center / contain no-repeat;
+  mask: url('/img/wordmark.webp') center / contain no-repeat;
+}
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ---------- enlaces ---------- */
