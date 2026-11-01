@@ -49,19 +49,6 @@ a { color: inherit; }
   animation: spin 9s linear infinite;
 }
 .disc.d1 { left: calc(50% - 100px); }
-/* Marca en el borde: sin ella el disco se ve estático al girar (los surcos y la etiqueta son simétricos). */
-.disc::before {
-  content: '';
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  margin-left: -4px;
-  border-radius: 50%;
-  background: #fffdfa;
-  opacity: 0.8;
-}
 .disc.d1 .label {
   position: absolute;
   inset: 34%;
