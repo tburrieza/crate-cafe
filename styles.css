@@ -49,21 +49,6 @@ a { color: inherit; }
   animation: spin 9s linear infinite;
 }
 .disc.d1 { left: calc(50% - 100px); }
-/* Taza de café: vapor que sube y se desvanece. */
-.cup { position: absolute; left: calc(50% + 50px); top: 20px; width: 150px; height: 150px; overflow: visible; }
-.cup .body, .cup .handle { fill: none; stroke: var(--fg); stroke-width: 0; }
-.cup .body { fill: var(--orange); }
-.cup .handle { stroke: var(--orange); stroke-width: 9; }
-.cup .saucer { fill: var(--fg); opacity: 0.85; }
-.cup .steam { fill: none; stroke: var(--muted); stroke-width: 3; stroke-linecap: round; opacity: 0; animation: steam 2.8s ease-in-out infinite; }
-.cup .s2 { animation-delay: 0.9s; }
-.cup .s3 { animation-delay: 1.8s; }
-@keyframes steam {
-  0% { opacity: 0; transform: translateY(6px); }
-  30% { opacity: 0.8; }
-  100% { opacity: 0; transform: translateY(-14px); }
-}
-@media (prefers-reduced-motion: reduce) { .cup .steam { animation: none; opacity: 0.5; } }
 /* Marca en el borde: sin ella el disco se ve estático al girar (los surcos y la etiqueta son simétricos). */
 .disc::before {
   content: '';
@@ -120,6 +105,8 @@ h1 { margin: 0; font-family: var(--display); font-weight: 900; font-size: 44px; 
 .info { font-size: 15px; line-height: 1.6; color: var(--muted); }
 .info strong { color: var(--fg); font-weight: 600; }
 .info p { margin: 0 0 14px; }
+.info a { text-decoration: none; }
+.info a:hover, .info a:focus-visible { color: var(--orange); }
 
 footer { margin-top: 36px; font-size: 22px; color: var(--orange); }
 
