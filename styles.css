@@ -6,25 +6,15 @@
 }
 
 :root {
-  --bg: #faf6f1;
-  --fg: #22180f;
-  --muted: #8c7b6b;
-  --line: #ecdfd2;
+  --bg: #17110c;
+  --fg: #f6eee6;
+  --muted: #a8977f;
+  --line: #3a2d22;
   --orange: #e2531f;
-  --orange-soft: #fbe9de;
+  --orange-soft: #2e1b11;
   --vinyl: #1b1410;
   --display: 'Crate Display', 'Cooper Black', Georgia, serif;
   font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --bg: #17110c;
-    --fg: #f6eee6;
-    --muted: #a8977f;
-    --line: #3a2d22;
-    --orange-soft: #2e1b11;
-  }
 }
 
 * { box-sizing: border-box; }
@@ -77,7 +67,7 @@ h1 { margin: 0; font-family: var(--display); font-weight: 900; font-size: 44px; 
   width: min(300px, 75vw);
   aspect-ratio: 2000 / 351;
   margin: 0 auto;
-  background: var(--orange);
+  background: var(--fg);
   -webkit-mask: url('/img/wordmark.webp') center / contain no-repeat;
   mask: url('/img/wordmark.webp') center / contain no-repeat;
 }
