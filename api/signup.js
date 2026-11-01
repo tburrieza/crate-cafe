@@ -48,19 +48,20 @@ module.exports = async (req, res) => {
     const db = await getDb();
     await ensureIndex(db);
     const now = new Date();
-    await db.collection('signups').updateOne(
-      { email },
-      {
-        $setOnInsert: {
-          email,
-          createdAt: now,
-          source: 'web',
-          consent: { terms: TERMS_VERSION, at: now, privacy: true, transferUK: true },
-        },
-        $set: { nombre, apellido, updatedAt: now },
-      },
-      { upsert: true },
-    );
+    // Solo altas nuevas: un email ya registrado no se modifica desde la web.
+    // Misma respuesta exista o no el email, así no se puede averiguar qué emails están registrados.
+    try {
+      await db.collection('signups').insertOne({
+        email,
+        nombre,
+        apellido,
+        createdAt: now,
+        source: 'web',
+        consent: { terms: TERMS_VERSION, at: now, privacy: true, transferUK: true },
+      });
+    } catch (err) {
+      if (err.code !== 11000) throw err;
+    }
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('signup:', err.message);
