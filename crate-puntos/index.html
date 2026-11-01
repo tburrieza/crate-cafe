@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crate Puntos · Crate Café</title>
+  <meta name="description" content="Crate Puntos: cada bebida que tomás en Crate Café suma puntos para canjear por un café.">
+  <link rel="icon" href="/img/logo.jpg">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="page">
+    <header>
+      <img src="/img/logo.jpg" alt="Crate Café">
+      <a class="brand" href="/">Crate Café</a>
+    </header>
+
+    <h1>Crate Puntos</h1>
+    <p class="lead">Un programa de fidelización de Crate Café. Cada bebida que tomás en el local suma puntos, y podés canjearlos por un café.</p>
+
+    <h2>Cómo funciona</h2>
+    <ol>
+      <li>Te registrás con tus datos y aceptás los términos.</li>
+      <li>Por cada bebida —fría o caliente— que consumís en el local, sumás <strong>1 punto</strong>.</li>
+      <li>Cuando juntás puntos, podés canjearlos por un café que define el local.</li>
+    </ol>
+    <p class="note">La equivalencia entre puntos y consumos, y entre puntos y canjes, puede cambiar sin previo aviso. Ver los términos.</p>
+
+    <section class="card" id="registro">
+      <h2 style="margin-top:0">Registrarme</h2>
+      <form class="form" id="signup" novalidate>
+        <label>Nombre
+          <input type="text" name="nombre" maxlength="60" autocomplete="given-name" required>
+        </label>
+        <label>Apellido
+          <input type="text" name="apellido" maxlength="60" autocomplete="family-name" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" maxlength="120" autocomplete="email" required>
+        </label>
+        <label class="check">
+          <input type="checkbox" name="consent" required>
+          <span>Leí los <a href="/crate-puntos/terminos" target="_blank" rel="noopener">términos y condiciones</a> y la política de privacidad. Acepto que mis datos se traten para el programa, incluida su conservación en la nube en Londres (Reino Unido).</span>
+        </label>
+        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit">Quiero registrarme</button>
+        <p class="msg" id="msg" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <p class="note">Crate Café · Conesa 3170, Núñez, CABA · Martes a domingos, 08 a 20 h</p>
+  </div>
+
+  <script>
+    (() => {
+      const form = document.getElementById('signup');
+      const msg = document.getElementById('msg');
+      const btn = form.querySelector('button');
+
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        msg.className = 'msg';
+        const data = Object.fromEntries(new FormData(form));
+        const payload = {
+          nombre: data.nombre || '',
+          apellido: data.apellido || '',
+          email: data.email || '',
+          consent: form.consent.checked,
+          website: data.website || '',
+        };
+        if (!payload.nombre || !payload.apellido || !payload.email) return showErr('Completá nombre, apellido y email.');
+        if (!form.consent.checked) return showErr('Tenés que aceptar los términos para registrarte.');
+
+        btn.disabled = true;
+        try {
+          const res = await fetch('/api/signup', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const json = await res.json().catch(() => ({}));
+          if (!res.ok || !json.ok) return showErr(json.error || 'No pudimos registrarte. Probá de nuevo.');
+          form.reset();
+          msg.className = 'msg ok';
+          msg.textContent = '¡Listo! Ya estás registrado en Crate Puntos.';
+        } catch {
+          showErr('Sin conexión. Probá de nuevo.');
+        } finally {
+          btn.disabled = false;
+        }
+      });
+
+      function showErr(text) {
+        msg.className = 'msg err';
+        msg.textContent = text;
+      }
+    })();
+  </script>
+</body>
+</html>

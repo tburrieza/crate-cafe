@@ -1,0 +1,145 @@
+@font-face {
+  font-family: 'Crate Display';
+  src: url('/fonts/fraunces-black-soft.woff2') format('woff2');
+  font-weight: 900;
+  font-display: swap;
+}
+
+:root {
+  --bg: #faf6f1;
+  --fg: #22180f;
+  --muted: #8c7b6b;
+  --line: #ecdfd2;
+  --orange: #e2531f;
+  --orange-soft: #fbe9de;
+  --vinyl: #1b1410;
+  --display: 'Crate Display', 'Cooper Black', Georgia, serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #17110c;
+    --fg: #f6eee6;
+    --muted: #a8977f;
+    --line: #3a2d22;
+    --orange-soft: #2e1b11;
+  }
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); min-height: 100vh; }
+a { color: inherit; }
+
+.wrap { max-width: 440px; margin: 0 auto; padding: 48px 16px 32px; text-align: center; }
+
+/* ---------- discos ---------- */
+
+.discs { position: relative; height: 200px; margin-bottom: 20px; }
+.disc {
+  position: absolute;
+  top: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, transparent 0 28%, rgba(255, 255, 255, 0.05) 28% 29%, transparent 29% 36%, rgba(255, 255, 255, 0.06) 36% 37%, transparent 37% 52%, rgba(255, 255, 255, 0.05) 52% 53%, transparent 53%),
+    conic-gradient(from 30deg, #2a211b, #120d0a 25%, #2a211b 50%, #120d0a 75%, #2a211b);
+  box-shadow: 0 10px 24px rgba(34, 24, 15, 0.25);
+  animation: spin 9s linear infinite;
+}
+.disc.d1 { left: calc(50% - 150px); }
+.disc.d2 { left: calc(50% - 40px); width: 180px; height: 180px; background: var(--vinyl); animation-duration: 12s; animation-direction: reverse; }
+.disc.d1 .label {
+  position: absolute;
+  inset: 34%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--orange);
+}
+.disc.d1 .label img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.disc.d2::after {
+  content: '';
+  position: absolute;
+  inset: 38%;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .disc { animation: none; } }
+
+/* ---------- textos ---------- */
+
+h1 { margin: 0; font-family: var(--display); font-weight: 900; font-size: 44px; line-height: 1; letter-spacing: 0.01em; }
+.tag { margin: 8px 0 0; color: var(--orange); font-weight: 600; font-size: 17px; }
+
+/* ---------- enlaces ---------- */
+
+.links { display: grid; gap: 12px; margin: 32px 0 28px; }
+.links a {
+  display: block;
+  padding: 16px 18px;
+  border: 1.5px solid var(--fg);
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.15s, color 0.15s;
+}
+.links a:hover, .links a:focus-visible { background: var(--orange); border-color: var(--orange); color: #fff; outline: none; }
+
+/* ---------- info ---------- */
+
+.info { font-size: 15px; line-height: 1.6; color: var(--muted); }
+.info strong { color: var(--fg); font-weight: 600; }
+.info p { margin: 0 0 14px; }
+
+footer { margin-top: 36px; font-size: 22px; color: var(--orange); }
+
+/* ---------- Crate Puntos ---------- */
+
+.page { max-width: 640px; margin: 0 auto; padding: 36px 20px 56px; line-height: 1.6; }
+.page header { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.page header img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
+.page header .brand { font-family: var(--display); font-weight: 900; font-size: 22px; text-decoration: none; }
+.page h1 { font-size: 36px; margin: 0 0 12px; text-align: left; }
+.page h2 { font-family: var(--display); font-weight: 900; font-size: 22px; margin: 36px 0 10px; }
+.page p, .page li { color: var(--fg); }
+.page .lead { font-size: 18px; margin: 0 0 20px; }
+.page .note { color: var(--muted); font-size: 14px; }
+.page ol, .page ul { padding-left: 22px; }
+.page ol li, .page ul li { margin-bottom: 8px; }
+
+.card { background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 22px; margin: 28px 0; }
+
+.form { display: grid; gap: 12px; }
+.form label { display: grid; gap: 6px; font-size: 14px; font-weight: 600; }
+.form input[type='text'], .form input[type='email'] {
+  font: inherit;
+  font-weight: 400;
+  padding: 12px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--fg);
+}
+.form input:focus { outline: 2px solid var(--orange); outline-offset: 1px; }
+.form .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: 14px; }
+.form .check input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--orange); flex: none; }
+.form button {
+  font: inherit;
+  font-weight: 700;
+  padding: 14px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--orange);
+  color: #fff;
+  cursor: pointer;
+}
+.form button:disabled { opacity: 0.5; cursor: default; }
+.form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.msg { min-height: 1.4em; margin: 0; font-size: 14px; }
+.msg.ok { color: #2e8b57; font-weight: 600; }
+.msg.err { color: #c0392b; }
+
+.cta { display: inline-block; margin-top: 8px; padding: 12px 22px; border-radius: 999px; background: var(--orange); color: #fff; text-decoration: none; font-weight: 700; }

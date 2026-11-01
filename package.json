@@ -1,0 +1,12 @@
+{
+  "name": "crate-cafe",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Crate Café: linktree y landing de Crate Puntos (Vercel + MongoDB)",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "mongodb": "^6.21.0"
+  }
+}

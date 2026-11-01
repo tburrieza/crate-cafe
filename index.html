@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crate Café</title>
+  <meta name="description" content="Crate Café: café y vinilos. Conesa 3170, Núñez, CABA.">
+  <link rel="icon" href="/img/logo.jpg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preload" href="/fonts/fraunces-black-soft.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body>
+  <main class="wrap">
+    <section aria-label="Crate Café">
+      <div class="discs" aria-hidden="true">
+        <div class="disc d1"><div class="label"><img src="/img/logo.jpg" alt=""></div></div>
+        <div class="disc d2"></div>
+      </div>
+      <h1>Crate Café</h1>
+      <p class="tag">Café y vinilos</p>
+    </section>
+
+    <!-- Enlaces por defecto: se ven al instante. app.js los reemplaza por los de Mongo (/api/links). -->
+    <nav class="links" id="links" aria-label="Enlaces">
+      <a href="https://www.instagram.com/elcafedecrate/" target="_blank" rel="noopener">Instagram · @elcafedecrate</a>
+      <a href="/crate-puntos">Crate Puntos</a>
+    </nav>
+
+    <section class="info">
+      <p><strong>Conesa 3170</strong><br>Núñez, Ciudad Autónoma de Buenos Aires</p>
+      <p><strong>Martes a domingos</strong><br>08 a 20 h</p>
+    </section>
+
+    <footer aria-label="Firma">ツ</footer>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "regions": ["lhr1"],
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)\\.(jpg|woff2|css|js)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=2592000, immutable" }]
+    }
+  ]
+}
